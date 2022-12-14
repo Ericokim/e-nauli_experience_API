@@ -15,33 +15,19 @@ exports.header = {
   },
   host: "localhost:5000",
   basePath: "/",
-  license: {
-    name: "Apache 2.0",
-    url: "https://www.apache.org/licenses/LICENSE-2.0.html",
-  },
+  // license: {
+  //   name: "Apache 2.0",
+  //   url: "https://www.apache.org/licenses/LICENSE-2.0.html",
+  // },
   servers: [
     {
       url: "http://localhost:5000",
-      description: "Development server",
+      description: "Dev_Server",
     },
-    // {
-    //   url: "https://{username}.example.com:{port}/{basePath}",
-    //   description: "Production server",
-    //   variables: {
-    //     username: {
-    //       default: "demo",
-    //       description:
-    //         "this value is assigned by the service provider, in this example `gigantic-server.com`",
-    //     },
-    //     port: {
-    //       enum: ["8443", "443"],
-    //       default: "8443",
-    //     },
-    //     basePath: {
-    //       default: "v2",
-    //     },
-    //   },
-    // },
+    {
+      url: "https://e-nauli-experience-api.vercel.app",
+      description: "Prod_Server",
+    },
   ],
 };
 

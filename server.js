@@ -70,7 +70,22 @@ app.use(hpp());
 app.use(cors());
 
 // Set static folder
-app.use(express.static(path.join(__dirname, "public")));
+const publicDirPath = path.join(__dirname, "/public");
+app.use(express.static(publicDirPath));
+
+// File extensions
+app.use(
+  express.static(publicDirPath, {
+    extensions: ["html", "css", "js", "png", "jpg", "json", "ico"],
+  })
+);
+
+// Set View's
+app.set("", "/");
+app.set("views", publicDirPath);
+
+app.set("view engine", "ejs");
+app.engine("html", require("ejs").renderFile);
 
 // Mount Proxy endpoints routers
 app.use("/api/v1/auth", auth);
@@ -79,16 +94,23 @@ app.use("/api/v1/sacco", sacco);
 app.use(
   "/api-docs",
   swaggerUI.serve,
-  swaggerUI.setup(swaggerDocs, {
-    swaggerOptions: {
-      displayRequestDuration: true,
-      docExpansion: "none",
-      filter: false,
-      showExtensions: true,
-      showCommonExtensions: true,
-      displayOperationId: false,
-    },
-  })
+  swaggerUI.setup(
+    swaggerJSDoc({
+      swaggerDefinition: swaggerDocs,
+      apis: ["./server/*.js"],
+    }),
+
+    {
+      swaggerOptions: {
+        displayRequestDuration: true,
+        docExpansion: "none",
+        filter: false,
+        showExtensions: true,
+        showCommonExtensions: true,
+        displayOperationId: false,
+      },
+    }
+  )
 );
 
 app.use(errorHandler);
