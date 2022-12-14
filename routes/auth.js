@@ -3,6 +3,7 @@ const {
   getToken,
   register,
   login,
+  logout,
   changePassword,
   resetPassword,
   addWebProfile,
@@ -17,6 +18,7 @@ const { protect, tokenAuth } = require("../middleware/auth");
 router.use(protect);
 router.route("/getToken").post(getToken);
 router.route("/login").post(login);
+router.get("/logout", logout);
 router.route("/register").post(register);
 router.route("/changePassword").put(tokenAuth, changePassword);
 router.route("/resetPassword").put(resetPassword);

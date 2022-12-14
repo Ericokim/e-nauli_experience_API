@@ -198,6 +198,21 @@ exports.login = asyncHandler(async (req, res, next) => {
     });
 });
 
+// @desc      Log user out / clear cookie
+// @route     GET /api/v1/auth/logout
+// @access    Public
+exports.logout = asyncHandler(async (req, res, next) => {
+  res.cookie("token", "none", {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+
+  res.status(200).json({
+    success: true,
+    data: {},
+  });
+});
+
 // @desc      Change password
 // @route     PUT /api/v1/auth/changePassword
 // @access    Private
@@ -308,8 +323,7 @@ exports.getVerificationCode = asyncHandler(async (req, res, next) => {
           res.json(respn.data);
         })
         .catch((error) => {
-          let err = error.response?.data.status;
-          return next(new ErrorResponse(err.message, err.code));
+          next(error);
         });
     })
     .catch((error) => {
