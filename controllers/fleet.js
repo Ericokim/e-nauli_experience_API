@@ -21,8 +21,7 @@ exports.getVehicles = asyncHandler(async (req, res, next) => {
 
     return successHandler(res, data);
   } catch (error) {
-    let err = error.response.data.status;
-    return next(new ErrorResponse(err.message, err.code));
+    next(error);
   }
 });
 
@@ -104,8 +103,7 @@ exports.getOperators = asyncHandler(async (req, res, next) => {
 
     return successHandler(res, data);
   } catch (error) {
-    let err = error.response.data.status;
-    return next(new ErrorResponse(err.message, err.code));
+    next(error);
   }
 });
 
