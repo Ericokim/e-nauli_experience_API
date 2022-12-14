@@ -20,10 +20,10 @@ npm start
 
 ## Demo
 
-<!-- The API is live at [devcamper-api-pi](https://devcamper-api-pi.vercel.app/)
+The API is live at [enauli-api](https://e-nauli-experience-api.vercel.app/)
 
-Extensive documentation with examples [here](https://documenter.getpostman.com/view/2628723/UVsEWVF6)
+Extensive documentation with examples [here](https://e-nauli-experience-api.vercel.app/)
 
 - Version: 1.0.0
 - License: MIT
-- Author: Eric Kimathi -->
+- Author: Eric Kimathi
