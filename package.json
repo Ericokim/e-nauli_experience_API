@@ -4,12 +4,15 @@
   "description": "E-nauli Back-Office platform, experience API",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "SET NODE_ENV=production && node server",
+    "dev": "nodemon server"
   },
   "author": "Eric Kimathi",
   "license": "MIT",
   "dependencies": {
     "apicache": "^1.6.3",
+    "axios": "^1.2.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
     "colors": "^1.4.0",
@@ -22,6 +25,7 @@
     "express-async-handler": "^1.2.0",
     "express-mongo-sanitize": "^2.2.0",
     "express-rate-limit": "^6.6.0",
+    "express-session": "^1.17.3",
     "helmet": "^6.0.0",
     "hpp": "^0.2.3",
     "http-proxy-middleware": "^2.0.6",
@@ -30,6 +34,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
     "needle": "^3.1.0",
+    "querystring": "^0.2.1",
     "rotating-file-stream": "^3.0.4",
     "slugify": "^1.6.5",
     "speakeasy": "^2.0.0",
@@ -44,4 +49,3 @@
     "swagger-ui-express": "^4.6.0"
   }
 }
-
