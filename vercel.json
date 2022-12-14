@@ -1,69 +1,20 @@
 {
   "version": 2,
-  "env": {
-    "MY_KEY": "this is the value",
-    "SECRET": "@my-secret-name",
-    "NODE_ENV": "development",
-    "PORT": "5000",
-    "API_BASE_URL": "https://sandbox.enauli.com/v1",
-    "API_KEY_NAME": "",
-    "API_KEY_VALUE": "",
-    "API_KEY": "3ce56b08-a3ab-4f71-8124-8f577c80b78e",
-    "APP_SECRET": "1F7C8BC2357640E182BAAAC5212DE545",
-    "X_SERVER_KEY": "6F44EADC71C3D3DC26E7E8D8DDA41"
-  },
   "builds": [
     {
-      "src": "server.js",
+      "src": "./server.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/server.js"
+      "dest": "/"
     }
   ],
-
   "headers": [
     {
-      "source": "/service-worker.js",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        }
-      ]
-    },
-    {
       "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "x-server-key",
-          "value": "6F44EADC71C3D3DC26E7E8D8DDA41"
-        }
-      ]
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "query",
-          "key": "authorized"
-        }
-      ],
       "headers": [
         {
           "key": "x-server-key",
