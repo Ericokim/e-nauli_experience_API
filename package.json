@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "E-nauli Back-Office platform, experience API",
   "main": "server.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "SET NODE_ENV=production && node server",
@@ -10,6 +13,14 @@
   },
   "author": "Eric Kimathi",
   "license": "MIT",
+  "keywords": [
+    "node",
+    "express",
+    "server",
+    "route",
+    "page",
+    "web"
+  ],
   "dependencies": {
     "apicache": "^1.6.3",
     "axios": "^1.2.1",

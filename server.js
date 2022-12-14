@@ -87,6 +87,18 @@ app.set("views", publicDirPath);
 app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
 
+const options = {
+  customCss: ".swagger-ui .topbar { display: none }",
+  swaggerOptions: {
+    displayRequestDuration: true,
+    docExpansion: "none",
+    filter: false,
+    showExtensions: true,
+    showCommonExtensions: true,
+    displayOperationId: false,
+  },
+};
+
 // Mount Proxy endpoints routers
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/fleet", fleet);
@@ -99,19 +111,20 @@ app.use(
       swaggerDefinition: swaggerDocs,
       apis: ["./server/*.js"],
     }),
-
-    {
-      swaggerOptions: {
-        displayRequestDuration: true,
-        docExpansion: "none",
-        filter: false,
-        showExtensions: true,
-        showCommonExtensions: true,
-        displayOperationId: false,
-      },
-    }
+    options
   )
 );
+
+// app.use(
+//   "/api-docs",
+//   function (req, res, next) {
+//     swaggerDocs.host = req.get("host");
+//     req.swaggerDoc = swaggerDocs;
+//     next();
+//   },
+//   swaggerUI.serveFiles(swaggerDocs, options),
+//   swaggerUI.setup()
+// );
 
 app.use(errorHandler);
 
