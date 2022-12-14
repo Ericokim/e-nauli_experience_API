@@ -7,12 +7,14 @@ const helmet = require("helmet");
 const xss = require("xss-clean");
 const hpp = require("hpp");
 const cors = require("cors");
+const compression = require("compression");
 const bodyparser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const rateLimit = require("express-rate-limit");
 const errorHandler = require("./middleware/error");
 const swaggerDocs = require("./swagger");
 const swaggerUI = require("swagger-ui-express");
+const swaggerJSDoc = require("swagger-jsdoc");
 
 // Load env vars
 dotenv.config();
@@ -22,6 +24,7 @@ const auth = require("./routes/auth");
 const fleet = require("./routes/fleet");
 const sacco = require("./routes/sacco");
 
+// Initialize express
 const app = express();
 
 // Body parser
@@ -38,6 +41,9 @@ app.use(cookieParser());
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
+// compress responses
+app.use(compression());
 
 // Set security headers
 app.use(helmet({ contentSecurityPolicy: false }));
@@ -70,7 +76,20 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/fleet", fleet);
 app.use("/api/v1/sacco", sacco);
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+app.use(
+  "/api-docs",
+  swaggerUI.serve,
+  swaggerUI.setup(swaggerDocs, {
+    swaggerOptions: {
+      displayRequestDuration: true,
+      docExpansion: "none",
+      filter: false,
+      showExtensions: true,
+      showCommonExtensions: true,
+      displayOperationId: false,
+    },
+  })
+);
 
 app.use(errorHandler);
 

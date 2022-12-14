@@ -5,7 +5,14 @@ exports.register = {
     summary: "Register a user",
     description: "Create an account for the specified user",
     operationId: "registerUser", // unique operation id
-    parameters: [],
+    parameters: [
+      {
+        name: "x-server-key", // name of the param
+        in: "header", // location of the param
+        required: true, // Mandatory param
+        description: "an authorization header",
+      },
+    ],
     // security
     security: [
       {
@@ -45,7 +52,17 @@ exports.login = {
     description:
       "Signln provides functionality to sign in a user to the web app",
     operationId: "loginUser", // unique operation id
-    parameters: [],
+    parameters: [
+      {
+        name: "x-server-key", // name of the param
+        in: "header", // location of the param
+        required: true, // Mandatory param
+        description: "An authorization header",
+        schema: {
+          type: "string",
+        },
+      },
+    ],
     // security
     security: [
       {
@@ -113,9 +130,7 @@ exports.changePassword = {
     summary: "Change user password",
     description: "Change user password", // short desc
     operationId: "changePassword", // unique operation id
-    parameters: [
-      // expected params
-    ],
+    parameters: [],
     // security
     security: [
       {
@@ -158,7 +173,12 @@ exports.resetPassword = {
     description: "reset user password", // short desc
     operationId: "resetPassword", // unique operation id
     parameters: [
-      // expected params
+      {
+        name: "x-server-key", // name of the param
+        in: "header", // location of the param
+        required: true, // Mandatory param
+        description: "an authorization header",
+      },
     ],
     // security
     security: [
@@ -202,7 +222,12 @@ exports.addWebProfile = {
     description: "add user WebProfile", // short desc
     operationId: "addWebProfile", // unique operation id
     parameters: [
-      // expected params
+      {
+        name: "x-server-key", // name of the param
+        in: "header", // location of the param
+        required: true, // Mandatory param
+        description: "an authorization header",
+      },
     ],
     // security
     security: [
@@ -353,7 +378,7 @@ exports.AuthSchema = {
     },
   },
 
-  addWebProfile: {
+  addWebProfileBody: {
     type: "object",
     properties: {
       msisdn: {

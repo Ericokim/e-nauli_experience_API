@@ -10,7 +10,8 @@ exports.header = {
   info: {
     version: "1.0.0",
     title: "E-nauli Experience API",
-    description: "E-nauli Back-Office platform, experience API",
+    description:
+      "Experience API for E-nauli Application to manage fleet and sacco.",
   },
   host: "localhost:5000",
   basePath: "/",
@@ -55,41 +56,10 @@ exports.components = {
         scheme: "bearer",
         bearerFormat: "JWT",
       },
+      // ApiKeyAuth: { type: "apiKey", in: "header", name: "x-server-key" },
     },
 
     schemas: {
-      //  Pagination Schema
-      Pagination: {
-        type: "object",
-        properties: {
-          count: {
-            type: "number",
-            description: "Total count of data",
-            example: "0",
-          },
-          offset: {
-            type: "number",
-            description: "Page number",
-            example: "0",
-          },
-          pageSize: {
-            type: "number",
-            description: "Page Size number",
-            example: "10",
-          },
-          next: {
-            type: "number",
-            description: "Next page",
-            example: "2",
-          },
-          previous: {
-            type: "number",
-            description: "Previous page",
-            example: "1",
-          },
-        },
-      },
-
       ...AuthSchema,
       ...VehicleSchema,
       ...OperatorSchema,
@@ -97,22 +67,6 @@ exports.components = {
       ...SaccoChargeSchema,
       ...SaccosOfficialSchema,
       ...SaccoStationSchema,
-
-      //  Error Schema
-      Error: {
-        type: "object",
-        properties: {
-          success: {
-            type: "boolean",
-          },
-          error: {
-            type: "string",
-          },
-          internal_code: {
-            type: "string",
-          },
-        },
-      },
     },
 
     responses: {
