@@ -23,7 +23,7 @@ router.route("/register").post(register);
 router.route("/changePassword").put(tokenAuth, changePassword);
 router.route("/resetPassword").put(resetPassword);
 router.route("/verificationCode/:id").get(getVerificationCode);
-router.route("/addWebProfile").put(addWebProfile);
+router.route("/addWebProfile").put(tokenAuth, addWebProfile);
 router.route("/verifyCode").post(verifyCode);
 
 module.exports = router;

@@ -11,8 +11,8 @@ const bodyparser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const rateLimit = require("express-rate-limit");
 const errorHandler = require("./middleware/error");
-// const swaggerDocs = require("./swagger");
-// const swaggerUI = require("swagger-ui-express");
+const swaggerDocs = require("./swagger");
+const swaggerUI = require("swagger-ui-express");
 
 // Load env vars
 dotenv.config();
@@ -70,7 +70,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/fleet", fleet);
 app.use("/api/v1/sacco", sacco);
-// app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 app.use(errorHandler);
 
