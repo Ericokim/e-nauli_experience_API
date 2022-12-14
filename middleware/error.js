@@ -8,27 +8,27 @@ const errorHandler = (err, req, res, next) => {
   // Log to console for dev
   // console.log(err);
 
-  // Mongoose bad ObjectId
-  if (err.name === "CastError") {
-    const message = `Resource not found`;
-    error = new ErrorResponse(message, 404);
-  }
-
-  // Mongoose duplicate key
-  if (err.code === 11000) {
-    const message = "Duplicate field value entered";
+  // Bad Request
+  if (err?.statusCode === 400) {
+    const message = err.message;
+    error = new ErrorResponse(message, 400);
+  } else if (err.message === "Request failed with status code 400") {
+    const message = err.response.statusText;
     error = new ErrorResponse(message, 400);
   }
 
-  // Mongoose validation error
-  if (err.name === "ValidationError") {
-    const message = Object.values(err.errors).map((val) => val.message);
-    error = new ErrorResponse(message, 400);
+  // Unauthorized error
+  if (err?.statusCode === 401) {
+    const message = err.message;
+    error = new ErrorResponse(message, 401);
+  } else if (err.message === "Request failed with status code 401") {
+    const message = err.response.statusText;
+    error = new ErrorResponse(message, 401);
   }
 
   res.status(error.statusCode || 500).json({
     success: false,
-    error: error.message || "Server Error",
+    message: error.message || "Server Error",
   });
 };
 
