@@ -88,7 +88,7 @@ app.set("view engine", "ejs");
 app.engine("html", require("ejs").renderFile);
 
 const options = {
-  customCss: ".swagger-ui .topbar { display: none }",
+  customCss: ".swagger-ui .topbar { display: block }",
   swaggerOptions: {
     displayRequestDuration: true,
     docExpansion: "none",
