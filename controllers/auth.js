@@ -142,13 +142,12 @@ exports.login = asyncHandler(async (req, res, next) => {
     apiKey: API_KEY,
     appSecret: APP_SECRET,
   };
-  let token;
 
   await api
     .post(`/auth/token`, tokenformData)
     .then((resp) => {
       // console.log(data.data[0].accessToken);
-      token = resp.data.data[0]?.accessToken;
+      let token = resp.data.data[0]?.accessToken;
 
       const config = {
         headers: {
@@ -173,8 +172,11 @@ exports.login = asyncHandler(async (req, res, next) => {
           config
         )
         .then((respn) => {
-          token = respn.data.data[0]?.accessToken;
-          res.cookie("token", token);
+          let tokenAuth = respn.data.data[0]?.accessToken;
+          res.cookie("token", tokenAuth, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+          });
 
           res.json(respn.data);
         })
