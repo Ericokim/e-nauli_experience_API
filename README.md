@@ -20,9 +20,9 @@ npm start
 
 ## Demo
 
-The API is live at [enauli-api](https://e-nauli-experience-api.vercel.app/)
+The API is live at [enauli-api](https://e-nauli-experience-api-gbhg.vercel.app)
 
-Extensive documentation with examples [here](https://e-nauli-experience-api.vercel.app/)
+Extensive documentation with examples [here](https://e-nauli-experience-api-gbhg.vercel.app)
 
 - Version: 1.0.0
 - License: MIT
