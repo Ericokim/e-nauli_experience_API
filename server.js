@@ -70,22 +70,7 @@ app.use(hpp());
 app.use(cors());
 
 // Set static folder
-const publicDirPath = path.join(__dirname, "/public");
-app.use(express.static(publicDirPath));
-
-// File extensions
-app.use(
-  express.static(publicDirPath, {
-    extensions: ["html", "css", "js", "png", "jpg", "json", "ico"],
-  })
-);
-
-// Set View's
-app.set("", "/");
-app.set("views", publicDirPath);
-
-app.set("view engine", "ejs");
-app.engine("html", require("ejs").renderFile);
+app.use(express.static(path.join(__dirname, "public")));
 
 const options = {
   customCss: ".swagger-ui .topbar { display: block }",
@@ -114,17 +99,6 @@ app.use(
     options
   )
 );
-
-// app.use(
-//   "/api-docs",
-//   function (req, res, next) {
-//     swaggerDocs.host = req.get("host");
-//     req.swaggerDoc = swaggerDocs;
-//     next();
-//   },
-//   swaggerUI.serveFiles(swaggerDocs, options),
-//   swaggerUI.setup()
-// );
 
 app.use(errorHandler);
 
