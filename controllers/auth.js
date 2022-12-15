@@ -43,10 +43,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     .then((resp) => {
       // console.log(data.data[0].accessToken);
       let token = resp.data.data[0]?.accessToken;
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-      });
+      res.cookie("token", token);
 
       const config = {
         headers: {
@@ -98,10 +95,7 @@ exports.addWebProfile = asyncHandler(async (req, res, next) => {
     .then((resp) => {
       // console.log(data.data[0].accessToken);
       let token = resp.data.data[0]?.accessToken;
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-      });
+      res.cookie("token", token);
 
       const config = {
         headers: {
@@ -180,10 +174,7 @@ exports.login = asyncHandler(async (req, res, next) => {
         )
         .then((respn) => {
           token = respn.data.data[0]?.accessToken;
-          res.cookie("token", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-          });
+          res.cookie("token", token);
 
           res.json(respn.data);
         })
@@ -255,10 +246,7 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
     .then((resp) => {
       // console.log(data.data[0].accessToken);
       let token = resp.data.data[0]?.accessToken;
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-      });
+      res.cookie("token", token);
 
       const config = {
         headers: {
