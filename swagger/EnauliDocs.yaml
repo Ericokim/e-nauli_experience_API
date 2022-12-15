@@ -11,7 +11,7 @@ license:
 servers:
   - url: "http://localhost:5000"
     description: Dev_Server
-  - url: "https://e-nauli-experience-api.vercel.app"
+  - url: "https://e-nauli-experience-api-gbhg.vercel.app"
     description: Prod_Server
 paths:
   /api/v1/auth/register:
