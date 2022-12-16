@@ -15,6 +15,7 @@ const rateLimit = require("express-rate-limit");
 const errorHandler = require("./middleware/error");
 const swaggerDocs = require("./swagger");
 const swaggerUI = require("swagger-ui-express");
+var swaggerUi = require("swagger-ui-dist");
 
 // Load env vars
 dotenv.config();
@@ -70,12 +71,20 @@ app.use(hpp());
 app.use(cors());
 
 // Set static folder
-app.use(express.static(path.join(__dirname, "public")));
+//app.use(express.static(path.join(__dirname, "public")));
+
+const publicDirPath = path.join(__dirname, "public");
+app.use(express.static(publicDirPath));
+
+// File extensions
+app.use(
+  express.static(publicDirPath, {
+    extensions: ["html", "css", "js", "png", "jpg", "json", "ico"],
+  })
+);
 
 const options = {
-  // customCss: ".swagger-ui .topbar { display: block }",
   customSiteTitle: "E-nauli experience API",
-  customCssUrl: "/swagger-ui.css",
   swaggerOptions: {
     // validatorUrl: null,
     displayRequestDuration: true,
