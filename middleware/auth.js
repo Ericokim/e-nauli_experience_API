@@ -31,11 +31,7 @@ exports.tokenAuth = asyncHandler(async (req, res, next) => {
     req.headers.authorization.startsWith("Bearer")
   ) {
     try {
-      token =
-        req.body.token ||
-        req.query.token ||
-        req.cookies.token ||
-        req.headers["x-access-token"];
+      token = req.cookies.token;
 
       token = req.headers.authorization.split(" ")[1];
 

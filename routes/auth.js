@@ -16,7 +16,7 @@ const router = express.Router();
 const { protect, tokenAuth } = require("../middleware/auth");
 
 // router.use(protect);
-router.route("/getToken").post(protect, getToken);
+router.route("/getToken").post(getToken);
 router.route("/login").post(protect, login);
 router.get("/logout", logout);
 router.route("/register").post(protect, register);

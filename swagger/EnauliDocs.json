@@ -7,10 +7,6 @@
   },
   "host": "localhost:5000",
   "basePath": "/",
-  "license": {
-    "name": "Apache 2.0",
-    "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
-  },
   "servers": [
     {
       "url": "http://localhost:5000",
@@ -21,1604 +17,6 @@
       "description": "Prod_Server"
     }
   ],
-  "paths": {
-    "/api/v1/auth/register": {
-      "post": {
-        "tags": ["Auth"],
-        "summary": "Register a user",
-        "description": "Create an account for the specified user",
-        "operationId": "registerUser",
-        "parameters": [
-          {
-            "name": "x-server-key",
-            "in": "header",
-            "description": "an authorization header",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string",
-              "examples": ["6F44EADC71C3D3DC26E7E8D8DDA41"]
-            }
-          }
-        ],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/registerBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Request processed successfullyy"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/api/v1/auth/login": {
-      "post": {
-        "tags": ["Auth"],
-        "summary": "login user",
-        "description": "Signln provides functionality to sign in a user to the web app",
-        "operationId": "loginUser",
-        "parameters": [
-          {
-            "name": "x-server-key",
-            "in": "header",
-            "description": "an authorization header",
-            "required": true,
-            "style": "simple",
-            "schema": {
-              "type": "string",
-              "examples": ["6F44EADC71C3D3DC26E7E8D8DDA41"]
-            }
-          }
-        ],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/loginBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Request processed successfullyy"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/api/v1/auth/logout": {
-      "get": {
-        "tags": ["Auth"],
-        "summary": "logout User",
-        "description": "Logout User and Clear token cookie",
-        "produces": ["application/json"],
-        "parameters": [],
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/auth/changePassword": {
-      "put": {
-        "tags": ["Auth"],
-        "summary": "Change user password",
-        "description": "Change user password",
-        "operationId": "changePassword",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/changePasswordBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/auth/resetPassword": {
-      "put": {
-        "tags": ["Auth"],
-        "summary": "reset user password",
-        "description": "reset user password",
-        "operationId": "resetPassword",
-        "parameters": [
-          {
-            "name": "x-server-key",
-            "in": "header",
-            "required": true,
-            "description": "an authorization header"
-          }
-        ],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/resetPasswordBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/auth/addWebProfile": {
-      "put": {
-        "tags": ["Auth"],
-        "summary": "add user WebProfile",
-        "description": "add user WebProfile",
-        "operationId": "addWebProfile",
-        "parameters": [
-          {
-            "name": "x-server-key",
-            "in": "header",
-            "required": true,
-            "description": "an authorization header"
-          }
-        ],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/addWebProfileBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-
-    "/api/v1/fleet/getVehicles": {
-      "get": {
-        "tags": ["Fleet"],
-        "summary": "Fetch all Vehicles",
-        "description": "Return list of all Vehicles",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "The number of items to skip before starting to collect the result set"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "The numbers of items to return"
-            }
-          },
-          {
-            "name": "saccoId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Filter operations"
-            }
-          },
-          {
-            "name": "routeId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Filter operations"
-            }
-          }
-        ],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "Request processed successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/Vehicle"
-                }
-              }
-            }
-          },
-
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/fleet/addVehicle": {
-      "post": {
-        "tags": ["Fleet"],
-        "summary": "Add Vehicles",
-        "description": "Create Vehicle",
-        "operationId": "createVehicle",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VehicleBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Request processed successfullyy"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/fleet/updateVehicle": {
-      "put": {
-        "tags": ["Fleet"],
-        "summary": "Update Vehicles",
-        "description": "Update Vehicle",
-        "operationId": "updateVehicle",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VehicleBodyUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/fleet/getOperators": {
-      "get": {
-        "tags": ["Fleet"],
-        "summary": "Fetch all Operators",
-        "description": "Return list of all Operators",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "The number of items to skip before starting to collect the result set"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "The numbers of items to return"
-            }
-          },
-          {
-            "name": "vehicleId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Filter operations"
-            }
-          }
-        ],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "Request processed successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/Operator"
-                }
-              }
-            }
-          },
-
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/fleet/addOperator": {
-      "post": {
-        "tags": ["Fleet"],
-        "summary": "Add Operators",
-        "description": "Create Operator",
-        "operationId": "createOperator",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OperatorBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Request processed successfullyy"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/fleet/updateOperator": {
-      "put": {
-        "tags": ["Fleet"],
-        "summary": "Update Operators",
-        "description": "Update Operator",
-        "operationId": "updateOperator",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OperatorBodyUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-
-    "/api/v1/sacco/getSaccos": {
-      "get": {
-        "tags": ["Sacco"],
-        "summary": "Fetch all Saccos",
-        "description": "Return list of all Saccos",
-        "operationId": "allSacco",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "The number of items to skip before starting to collect the result set"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "The numbers of items to return"
-            }
-          }
-        ],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "Request processed successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/Sacco"
-                }
-              }
-            }
-          },
-
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/getSacco/{id}": {
-      "get": {
-        "tags": ["Sacco"],
-        "summary": "Fetch single Sacco",
-        "description": "",
-        "operationId": "singleSacco",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "Request processed successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/Sacco"
-                }
-              }
-            }
-          },
-
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/addSacco": {
-      "post": {
-        "tags": ["Sacco"],
-        "summary": "Add Sacco",
-        "description": "Create Sacco",
-        "operationId": "createSacco",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaccoBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Request processed successfullyy"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/updateSacco": {
-      "put": {
-        "tags": ["Sacco"],
-        "summary": "Update Sacco",
-        "description": "Update Sacco",
-        "operationId": "updateSacco",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaccoBodyUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/updateSaccoStatus": {
-      "put": {
-        "tags": ["Sacco"],
-        "summary": "Update Sacco Status",
-        "description": "Update Sacco Status",
-        "operationId": "updateSaccoStatus",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaccoBodyStatusUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-
-    "/api/v1/sacco/getSaccoCharges": {
-      "get": {
-        "tags": ["Sacco Charge"],
-        "summary": "Fetch all Sacco Charges",
-        "description": "Return list of all Sacco Charges",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "The number of items to skip before starting to collect the result set"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "The numbers of items to return"
-            }
-          },
-          {
-            "name": "saccoId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Filter operations"
-            }
-          },
-          {
-            "name": "charge",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Filter operations",
-              "enum": [
-                "PlatformCharge",
-                "StatementCharge",
-                " ManifestCharge",
-                "ParcelCharge"
-              ]
-            }
-          }
-        ],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "Request processed successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/SaccoCharge"
-                }
-              }
-            }
-          },
-
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/getSaccoCharge/{id}": {
-      "get": {
-        "tags": ["Sacco Charge"],
-        "summary": "Fetch single Sacco Charge",
-        "description": "",
-        "operationId": "singleSaccoCharge",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "Request processed successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/SaccoCharge"
-                }
-              }
-            }
-          },
-
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/addSaccoCharge": {
-      "post": {
-        "tags": ["Sacco Charge"],
-        "summary": "Add Sacco Charge",
-        "description": "Create SaccoCharge",
-        "operationId": "createSaccoCharge",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaccoChargeBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Request processed successfullyy"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/updateSaccoCharge": {
-      "put": {
-        "tags": ["Sacco Charge"],
-        "summary": "Update Sacco Charges",
-        "description": "Update Sacco Charge",
-        "operationId": "updateSaccoCharge",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaccoChargeBodyUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/updateSaccoChargeStatus": {
-      "put": {
-        "tags": ["Sacco Charge"],
-        "summary": "Update Sacco Charge Status",
-        "description": "Update Sacco Charge Status",
-        "operationId": "updateSaccoChargeStatus",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaccoChargeBodyStatusUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/SaccoBalance": {
-      "post": {
-        "tags": ["Sacco"],
-        "summary": "Sacco Balance",
-        "description": "Gets specified sacco account running balance in cents",
-        "operationId": "SaccoBalance",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaccoBalanceBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Request processed successfullyy"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-
-    "/api/v1/sacco/getSaccoStations": {
-      "get": {
-        "tags": ["Sacco Station"],
-        "summary": "Fetch all Sacco Station",
-        "description": "Return list of all Sacco Station",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "The number of items to skip before starting to collect the result set"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "The numbers of items to return"
-            }
-          },
-          {
-            "name": "saccoId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Filter operations"
-            }
-          },
-          {
-            "name": "isActive",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Filter operations",
-              "enum": ["true", "false"]
-            }
-          }
-        ],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "Request processed successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/SaccoStation"
-                }
-              }
-            }
-          },
-
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/getSaccoStation/{id}": {
-      "get": {
-        "tags": ["Sacco Station"],
-        "summary": "Fetch single Sacco Station",
-        "description": "",
-        "operationId": "singleSaccoStation",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "Request processed successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/SaccoStation"
-                }
-              }
-            }
-          },
-
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/addSaccoStation": {
-      "post": {
-        "tags": ["Sacco Station"],
-        "summary": "Add Sacco Station",
-        "description": "Create Sacco Station",
-        "operationId": "createSaccoStation",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaccoStationBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Request processed successfullyy"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/updateSaccoStation": {
-      "put": {
-        "tags": ["Sacco Station"],
-        "summary": "Update Sacco Station",
-        "description": "Update Sacco Station",
-        "operationId": "updateSaccoStation",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaccoStationBodyUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/updateSaccoStationStatus": {
-      "put": {
-        "tags": ["Sacco Station"],
-        "summary": "Update Sacco Station Status",
-        "description": "Update Sacco Station Status",
-        "operationId": "updateSaccoStationStatus",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaccoStationBodyStatusUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-
-    "/api/v1/sacco/getSaccosOfficials": {
-      "get": {
-        "tags": ["Sacco Official"],
-        "summary": "Fetch all Sacco Official",
-        "description": "Return list of all Sacco Official",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "offset",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "The number of items to skip before starting to collect the result set"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "description": "The numbers of items to return"
-            }
-          },
-          {
-            "name": "saccoId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Filter operations"
-            }
-          },
-          {
-            "name": "saccoStationId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Filter operations"
-            }
-          },
-          {
-            "name": "userId",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Filter operations"
-            }
-          },
-          {
-            "name": "isActive",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Filter operations",
-              "enum": ["true", "false"]
-            }
-          },
-          {
-            "name": "designation",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "description": "Filter operations",
-              "enum": [
-                "Official",
-                "Agent",
-                "Clerk",
-                "Fuel",
-                "StationManager",
-                "ParcelAgent"
-              ]
-            }
-          }
-        ],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "Request processed successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/SaccosOfficial"
-                }
-              }
-            }
-          },
-
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/getSaccosOfficial/{id}": {
-      "get": {
-        "tags": ["Sacco Official"],
-        "summary": "Fetch single Sacco Official",
-        "description": "",
-        "operationId": "singleSaccosOfficial",
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-
-        "responses": {
-          "200": {
-            "description": "Request processed successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "$ref": "#/components/schemas/SaccosOfficial"
-                }
-              }
-            }
-          },
-
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/addSaccosOfficial": {
-      "post": {
-        "tags": ["Sacco Official"],
-        "summary": "Add Sacco Official",
-        "description": "Create Sacco Official",
-        "operationId": "createSaccosOfficial",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaccosOfficialBody"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Request processed successfullyy"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/updateSaccosOfficial": {
-      "put": {
-        "tags": ["Sacco Official"],
-        "summary": "Update Sacco Official",
-        "description": "Update Sacco Official",
-        "operationId": "updateSaccosOfficial",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaccosOfficialBodyUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    },
-    "/api/v1/sacco/updateSaccosOfficialStatus": {
-      "put": {
-        "tags": ["Sacco Official"],
-        "summary": "Update Sacco Official Status",
-        "description": "Update Sacco Official Status",
-        "operationId": "updateSaccosOfficialStatus",
-        "parameters": [],
-
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SaccosOfficialBodyStatusUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Request processed successfully"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        }
-      }
-    }
-  },
-
   "components": {
     "securitySchemes": {
       "bearerAuth": {
@@ -1628,7 +26,6 @@
         "bearerFormat": "JWT"
       }
     },
-
     "schemas": {
       "registerBody": {
         "type": "object",
@@ -1667,7 +64,6 @@
           "carrierCode": "string"
         }
       },
-
       "loginBody": {
         "type": "object",
         "properties": {
@@ -1687,7 +83,6 @@
           "password": "string"
         }
       },
-
       "changePasswordBody": {
         "type": "object",
         "properties": {
@@ -1713,7 +108,6 @@
           "newPassword": "string"
         }
       },
-
       "resetPasswordBody": {
         "type": "object",
         "properties": {
@@ -1739,7 +133,6 @@
           "newPassword": "string"
         }
       },
-
       "addWebProfileBody": {
         "type": "object",
         "properties": {
@@ -1748,7 +141,6 @@
             "required": true,
             "description": "Phone number of the user in INTERNATIONAl format. E.g. 2547XXXXXX or 2541XXXXXX"
           },
-
           "saccoId": {
             "type": "string",
             "required": true,
@@ -1765,7 +157,7 @@
             "description": "4 Digit Pin to secure user account"
           },
           "designation": {
-            "type": "enum",
+            "type": "string",
             "Enumerator": [
               "Official",
               "Agent",
@@ -1790,7 +182,6 @@
           "saccoStationId": "string"
         }
       },
-
       "Vehicle": {
         "type": "object",
         "properties": {
@@ -1856,7 +247,6 @@
           ]
         }
       },
-
       "VehicleBody": {
         "type": "object",
         "properties": {
@@ -1887,7 +277,6 @@
           "fleetNumber": "string"
         }
       },
-
       "VehicleBodyUpdate": {
         "type": "object",
         "properties": {
@@ -1930,7 +319,6 @@
           "seatingCapacity": 0
         }
       },
-
       "Operator": {
         "type": "object",
         "properties": {
@@ -2007,7 +395,6 @@
           ]
         }
       },
-
       "OperatorBody": {
         "type": "object",
         "properties": {
@@ -2022,10 +409,14 @@
             "description": "vehicleId of the operator"
           },
           "role": {
-            "type": "enum",
+            "type": "string",
             "required": true,
             "description": "Designation of a user to a vehicle. Can be one or multiple",
-            "Enumerator": ["Conductor", "Driver", "Owner"]
+            "Enumerator": [
+              "Conductor",
+              "Driver",
+              "Owner"
+            ]
           },
           "firstName": {
             "type": "string",
@@ -2066,7 +457,9 @@
         "example": {
           "msisdn": "254725358366",
           "vehicleId": "string",
-          "role": ["Conductor"],
+          "role": [
+            "Conductor"
+          ],
           "firstName": "string",
           "middleName": "string",
           "lastName": "string",
@@ -2076,7 +469,6 @@
           "bankCode": "string"
         }
       },
-
       "OperatorBodyUpdate": {
         "type": "object",
         "properties": {
@@ -2091,16 +483,23 @@
             "description": "vehicleId of the operator"
           },
           "role": {
-            "type": "enum",
+            "type": "string",
             "required": true,
             "description": "Designation of a user to a vehicle. Can be one or multiple",
-            "Enumerator": ["Conductor", "Driver", "Owner"]
+            "Enumerator": [
+              "Conductor",
+              "Driver",
+              "Owner"
+            ]
           },
           "activate": {
             "type": "boolean",
             "required": true,
             "description": "Activate flag toggles active(activate: true) and inactive(activate: false) status of an operator role for a specified vehicle",
-            "example": ["true", "false"]
+            "example": [
+              "true",
+              "false"
+            ]
           }
         },
         "example": {
@@ -2110,7 +509,6 @@
           "activate": true
         }
       },
-
       "Sacco": {
         "type": "object",
         "properties": {
@@ -2172,7 +570,6 @@
           ]
         }
       },
-
       "SaccoBody": {
         "type": "object",
         "properties": {
@@ -2264,7 +661,6 @@
           "platformFee": 10
         }
       },
-
       "SaccoBodyUpdate": {
         "type": "object",
         "properties": {
@@ -2326,7 +722,6 @@
           "tagline": "string"
         }
       },
-
       "SaccoBalanceBody": {
         "type": "object",
         "properties": {
@@ -2346,7 +741,6 @@
           "saccoId": "string"
         }
       },
-
       "SaccoBodyStatusUpdate": {
         "type": "object",
         "properties": {
@@ -2359,7 +753,10 @@
             "type": "boolean",
             "required": true,
             "description": "Activate flag toggles active(activate: true) and inactive(activate: false) status",
-            "example": ["true", "false"]
+            "example": [
+              "true",
+              "false"
+            ]
           }
         },
         "example": {
@@ -2367,7 +764,182 @@
           "activate": true
         }
       },
-
+      "SaccoCharge": {
+        "type": "object",
+        "properties": {
+          "saccoChargeId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "saccoId": {
+            "type": "string"
+          },
+          "saccoName": {
+            "type": "string"
+          },
+          "charge": {
+            "type": "string",
+            "Enumerator": [
+              "PlatformCharge",
+              "StatementCharge",
+              " ManifestCharge",
+              "ParcelCharge"
+            ]
+          },
+          "isPercentage": {
+            "type": "boolean"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "frequency": {
+            "type": "string",
+            "Enumerator": [
+              "PerTrip",
+              "PerDay",
+              "PerWeek",
+              "PerMonth",
+              "PerAnnum",
+              "OneOff",
+              "PerSMS"
+            ]
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "modifiedAt": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "message": "string",
+          "count": 0,
+          "data": [
+            {
+              "saccoChargeId": "string",
+              "name": "string",
+              "saccoId": "string",
+              "saccoName": "string",
+              "charge": "PlatformCharge",
+              "isPercentage": true,
+              "amount": 0,
+              "isActive": true,
+              "frequency": "PerTrip",
+              "createdAt": "2022-12-14T12:11:38.578Z",
+              "modifiedAt": "2022-12-14T12:11:38.578Z"
+            }
+          ]
+        }
+      },
+      "SaccoChargeBody": {
+        "type": "object",
+        "properties": {
+          "saccoId": {
+            "type": "string",
+            "required": true,
+            "description": "Sacco identifier"
+          },
+          "charge": {
+            "type": "string",
+            "required": true,
+            "Enumerator": [
+              "PlatformCharge",
+              "StatementCharge",
+              " ManifestCharge",
+              "ParcelCharge"
+            ]
+          },
+          "isPercentage": {
+            "type": "boolean",
+            "required": true
+          },
+          "amount": {
+            "type": "number"
+          },
+          "frequency": {
+            "type": "string",
+            "Enumerator": [
+              "PerTrip",
+              "PerDay",
+              "PerWeek",
+              "PerMonth",
+              "PerAnnum",
+              "OneOff",
+              "PerSMS"
+            ]
+          }
+        },
+        "example": {
+          "saccoId": "string",
+          "charge": "PlatformCharge",
+          "isPercentage": true,
+          "amount": 0,
+          "frequency": "PerTrip"
+        }
+      },
+      "SaccoChargeBodyUpdate": {
+        "type": "object",
+        "properties": {
+          "saccoChargeId": {
+            "type": "string",
+            "required": true,
+            "description": "Sacco charge identifier"
+          },
+          "isPercentage": {
+            "type": "boolean",
+            "required": true
+          },
+          "amount": {
+            "type": "number"
+          },
+          "frequency": {
+            "type": "string",
+            "Enumerator": [
+              "PerTrip",
+              "PerDay",
+              "PerWeek",
+              "PerMonth",
+              "PerAnnum",
+              "OneOff",
+              "PerSMS"
+            ]
+          }
+        },
+        "example": {
+          "saccoChargeId": "string",
+          "isPercentage": true,
+          "amount": 0,
+          "frequency": "PerTrip"
+        }
+      },
+      "SaccoChargeBodyStatusUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "required": true,
+            "description": "Identifier of the entity to toggle status"
+          },
+          "activate": {
+            "type": "boolean",
+            "required": true,
+            "description": "Activate flag toggles active(activate: true) and inactive(activate: false) status",
+            "example": [
+              "true",
+              "false"
+            ]
+          }
+        },
+        "example": {
+          "id": "string",
+          "activate": true
+        }
+      },
       "SaccosOfficial": {
         "type": "object",
         "properties": {
@@ -2465,7 +1037,6 @@
           ]
         }
       },
-
       "SaccosOfficialBody": {
         "type": "object",
         "properties": {
@@ -2480,7 +1051,7 @@
             "description": "Phone number of the sacco official in INTERNATIONAl format. E.g. 2547XXXXXX or 2541XXXXXX"
           },
           "designation": {
-            "type": "enum",
+            "type": "string",
             "Enumerator": [
               "Official",
               "Agent",
@@ -2503,7 +1074,6 @@
           "saccoStationId": "string"
         }
       },
-
       "SaccosOfficialBodyUpdate": {
         "type": "object",
         "properties": {
@@ -2513,7 +1083,7 @@
             "description": "Sacco charge identifier"
           },
           "designation": {
-            "type": "enum",
+            "type": "string",
             "Enumerator": [
               "Official",
               "Agent",
@@ -2535,7 +1105,6 @@
           "designation": "Official"
         }
       },
-
       "SaccosOfficialBodyStatusUpdate": {
         "type": "object",
         "properties": {
@@ -2548,7 +1117,10 @@
             "type": "boolean",
             "required": true,
             "description": "Activate flag toggles active(activate: true) and inactive(activate: false) status",
-            "example": ["true", "false"]
+            "example": [
+              "true",
+              "false"
+            ]
           }
         },
         "example": {
@@ -2556,7 +1128,6 @@
           "activate": true
         }
       },
-
       "SaccoStation": {
         "type": "object",
         "properties": {
@@ -2590,7 +1161,6 @@
           ]
         }
       },
-
       "SaccoStationBody": {
         "type": "object",
         "properties": {
@@ -2624,7 +1194,6 @@
           ]
         }
       },
-
       "SaccoStationBodyUpdate": {
         "type": "object",
         "properties": {
@@ -2656,7 +1225,6 @@
           "phoneNumber": "string"
         }
       },
-
       "SaccoStationBodyStatusUpdate": {
         "type": "object",
         "properties": {
@@ -2669,7 +1237,10 @@
             "type": "boolean",
             "required": true,
             "description": "Activate flag toggles active(activate: true) and inactive(activate: false) status",
-            "example": ["true", "false"]
+            "example": [
+              "true",
+              "false"
+            ]
           }
         },
         "example": {
@@ -2678,7 +1249,6 @@
         }
       }
     },
-
     "responses": {
       "validationBadge": {
         "description": "result of validation as valid/invalid badge",
@@ -2716,7 +1286,9 @@
   },
   "security": [
     {
-      "bearerAuth": []
+      "bearerAuth": [
+        
+      ]
     }
   ],
   "tags": [
@@ -2738,5 +1310,1735 @@
     {
       "name": "Sacco Station"
     }
-  ]
+  ],
+  "paths": {
+    "/api/v1/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Register a user",
+        "description": "Create an account for the specified user",
+        "operationId": "registerUser",
+        "parameters": [
+          {
+            "name": "x-server-key",
+            "in": "header",
+            "required": true,
+            "description": "an authorization header"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/registerBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request processed successfullyy"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "login user",
+        "description": "Signln provides functionality to sign in a user to the web app",
+        "operationId": "loginUser",
+        "parameters": [
+          {
+            "name": "x-server-key",
+            "in": "header",
+            "required": true,
+            "description": "An authorization header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/loginBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request processed successfullyy"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/logout": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "logout User",
+        "description": "Logout User and Clear token cookie",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/changePassword": {
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Change user password",
+        "description": "Change user password",
+        "operationId": "changePassword",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/changePasswordBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/resetPassword": {
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "reset user password",
+        "description": "reset user password",
+        "operationId": "resetPassword",
+        "parameters": [
+          {
+            "name": "x-server-key",
+            "in": "header",
+            "required": true,
+            "description": "an authorization header"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/resetPasswordBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/addWebProfile": {
+      "put": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "add user WebProfile",
+        "description": "add user WebProfile",
+        "operationId": "addWebProfile",
+        "parameters": [
+          {
+            "name": "x-server-key",
+            "in": "header",
+            "required": true,
+            "description": "an authorization header"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/addWebProfileBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/fleet/getVehicles": {
+      "get": {
+        "tags": [
+          "Fleet"
+        ],
+        "summary": "Fetch all Vehicles",
+        "description": "Return list of all Vehicles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The number of items to skip before starting to collect the result set"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The numbers of items to return"
+            }
+          },
+          {
+            "name": "saccoId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Filter operations"
+            }
+          },
+          {
+            "name": "routeId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Filter operations"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Vehicle"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/fleet/addVehicle": {
+      "post": {
+        "tags": [
+          "Fleet"
+        ],
+        "summary": "Add Vehicles",
+        "description": "Create Vehicle",
+        "operationId": "createVehicle",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request processed successfullyy"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/fleet/updateVehicle": {
+      "put": {
+        "tags": [
+          "Fleet"
+        ],
+        "summary": "Update Vehicles",
+        "description": "Update Vehicle",
+        "operationId": "updateVehicle",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleBodyUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/fleet/getOperators": {
+      "get": {
+        "tags": [
+          "Fleet"
+        ],
+        "summary": "Fetch all Operators",
+        "description": "Return list of all Operators",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The number of items to skip before starting to collect the result set"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The numbers of items to return"
+            }
+          },
+          {
+            "name": "vehicleId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Filter operations"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Operator"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/fleet/addOperator": {
+      "post": {
+        "tags": [
+          "Fleet"
+        ],
+        "summary": "Add Operators",
+        "description": "Create Operator",
+        "operationId": "createOperator",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OperatorBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request processed successfullyy"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/fleet/updateOperator": {
+      "put": {
+        "tags": [
+          "Fleet"
+        ],
+        "summary": "Update Operators",
+        "description": "Update Operator",
+        "operationId": "updateOperator",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OperatorBodyUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/getSaccos": {
+      "get": {
+        "tags": [
+          "Sacco"
+        ],
+        "summary": "Fetch all Saccos",
+        "description": "Return list of all Saccos",
+        "operationId": "allSacco",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The number of items to skip before starting to collect the result set"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The numbers of items to return"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Sacco"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/getSacco/{id}": {
+      "get": {
+        "tags": [
+          "Sacco"
+        ],
+        "summary": "Fetch single Sacco",
+        "description": "",
+        "operationId": "singleSacco",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Sacco"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/addSacco": {
+      "post": {
+        "tags": [
+          "Sacco"
+        ],
+        "summary": "Add Sacco",
+        "description": "Create Sacco",
+        "operationId": "createSacco",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaccoBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request processed successfullyy"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/updateSacco": {
+      "put": {
+        "tags": [
+          "Sacco"
+        ],
+        "summary": "Update Sacco",
+        "description": "Update Sacco",
+        "operationId": "updateSacco",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaccoBodyUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/updateSaccoStatus": {
+      "put": {
+        "tags": [
+          "Sacco"
+        ],
+        "summary": "Update Sacco Status",
+        "description": "Update Sacco Status",
+        "operationId": "updateSaccoStatus",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaccoBodyStatusUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/getSaccoCharges": {
+      "get": {
+        "tags": [
+          "Sacco Charge"
+        ],
+        "summary": "Fetch all Sacco Charges",
+        "description": "Return list of all Sacco Charges",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The number of items to skip before starting to collect the result set"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The numbers of items to return"
+            }
+          },
+          {
+            "name": "saccoId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Filter operations"
+            }
+          },
+          {
+            "name": "charge",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Filter operations",
+              "enum": [
+                "PlatformCharge",
+                "StatementCharge",
+                " ManifestCharge",
+                "ParcelCharge"
+              ]
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/SaccoCharge"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/getSaccoCharge/{id}": {
+      "get": {
+        "tags": [
+          "Sacco Charge"
+        ],
+        "summary": "Fetch single Sacco Charge",
+        "description": "",
+        "operationId": "singleSaccoCharge",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/SaccoCharge"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/addSaccoCharge": {
+      "post": {
+        "tags": [
+          "Sacco Charge"
+        ],
+        "summary": "Add Sacco Charge",
+        "description": "Create SaccoCharge",
+        "operationId": "createSaccoCharge",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaccoChargeBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request processed successfullyy"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/updateSaccoCharge": {
+      "put": {
+        "tags": [
+          "Sacco Charge"
+        ],
+        "summary": "Update Sacco Charges",
+        "description": "Update Sacco Charge",
+        "operationId": "updateSaccoCharge",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaccoChargeBodyUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/updateSaccoChargeStatus": {
+      "put": {
+        "tags": [
+          "Sacco Charge"
+        ],
+        "summary": "Update Sacco Charge Status",
+        "description": "Update Sacco Charge Status",
+        "operationId": "updateSaccoChargeStatus",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaccoChargeBodyStatusUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/SaccoBalance": {
+      "post": {
+        "tags": [
+          "Sacco"
+        ],
+        "summary": "Sacco Balance",
+        "description": "Gets specified sacco account running balance in cents",
+        "operationId": "SaccoBalance",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaccoBalanceBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request processed successfullyy"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/getSaccoStations": {
+      "get": {
+        "tags": [
+          "Sacco Station"
+        ],
+        "summary": "Fetch all Sacco Station",
+        "description": "Return list of all Sacco Station",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The number of items to skip before starting to collect the result set"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The numbers of items to return"
+            }
+          },
+          {
+            "name": "saccoId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Filter operations"
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Filter operations",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/SaccoStation"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/getSaccoStation/{id}": {
+      "get": {
+        "tags": [
+          "Sacco Station"
+        ],
+        "summary": "Fetch single Sacco Station",
+        "description": "",
+        "operationId": "singleSaccoStation",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/SaccoStation"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/addSaccoStation": {
+      "post": {
+        "tags": [
+          "Sacco Station"
+        ],
+        "summary": "Add Sacco Station",
+        "description": "Create Sacco Station",
+        "operationId": "createSaccoStation",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaccoStationBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request processed successfullyy"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/updateSaccoStation": {
+      "put": {
+        "tags": [
+          "Sacco Station"
+        ],
+        "summary": "Update Sacco Station",
+        "description": "Update Sacco Station",
+        "operationId": "updateSaccoStation",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaccoStationBodyUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/updateSaccoStationStatus": {
+      "put": {
+        "tags": [
+          "Sacco Station"
+        ],
+        "summary": "Update Sacco Station Status",
+        "description": "Update Sacco Station Status",
+        "operationId": "updateSaccoStationStatus",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaccoStationBodyStatusUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/getSaccosOfficials": {
+      "get": {
+        "tags": [
+          "Sacco Official"
+        ],
+        "summary": "Fetch all Sacco Official",
+        "description": "Return list of all Sacco Official",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The number of items to skip before starting to collect the result set"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The numbers of items to return"
+            }
+          },
+          {
+            "name": "saccoId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Filter operations"
+            }
+          },
+          {
+            "name": "saccoStationId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Filter operations"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Filter operations"
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Filter operations",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "name": "designation",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Filter operations",
+              "enum": [
+                "Official",
+                "Agent",
+                "Clerk",
+                "Fuel",
+                "StationManager",
+                "ParcelAgent"
+              ]
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/SaccosOfficial"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/getSaccosOfficial/{id}": {
+      "get": {
+        "tags": [
+          "Sacco Official"
+        ],
+        "summary": "Fetch single Sacco Official",
+        "description": "",
+        "operationId": "singleSaccosOfficial",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/SaccosOfficial"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/addSaccosOfficial": {
+      "post": {
+        "tags": [
+          "Sacco Official"
+        ],
+        "summary": "Add Sacco Official",
+        "description": "Create Sacco Official",
+        "operationId": "createSaccosOfficial",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaccosOfficialBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request processed successfullyy"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/updateSaccosOfficial": {
+      "put": {
+        "tags": [
+          "Sacco Official"
+        ],
+        "summary": "Update Sacco Official",
+        "description": "Update Sacco Official",
+        "operationId": "updateSaccosOfficial",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaccosOfficialBodyUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/sacco/updateSaccosOfficialStatus": {
+      "put": {
+        "tags": [
+          "Sacco Official"
+        ],
+        "summary": "Update Sacco Official Status",
+        "description": "Update Sacco Official Status",
+        "operationId": "updateSaccosOfficialStatus",
+        "parameters": [
+          
+        ],
+        "security": [
+          {
+            "bearerAuth": [
+              
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaccosOfficialBodyStatusUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request processed successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
 }
