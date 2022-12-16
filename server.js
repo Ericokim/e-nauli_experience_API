@@ -75,8 +75,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const options = {
   customCss: ".swagger-ui .topbar { display: block }",
   customSiteTitle: "E-nauli experience API",
-  // customCssUrl: "/custom.css",
-
+  customCssUrl: "/swagger-ui.css",
   swaggerOptions: {
     // validatorUrl: null,
     displayRequestDuration: true,
