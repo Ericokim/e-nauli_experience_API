@@ -28,7 +28,7 @@
         } else {
           url = window.location.origin;
         }
-        url = "assets/js/EnauliDocs.json";
+        url = "assets/js/swagger.json";
         window.ui = SwaggerUIBundle({
           url: url,
           dom_id: "#swagger-ui",
@@ -36,8 +36,6 @@
           presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
           plugins: [SwaggerUIBundle.plugins.DownloadUrl],
           layout: "StandaloneLayout",
-
-          filter: false,
           displayRequestDuration: true,
           docExpansion: "list",
           filter: false,

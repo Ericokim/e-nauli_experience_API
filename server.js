@@ -70,8 +70,6 @@ app.use(hpp());
 app.use(cors());
 
 // Set static folder
-//app.use(express.static(path.join(__dirname, "public")));
-
 const publicDirPath = path.join(__dirname, "public");
 app.use(express.static(publicDirPath));
 
@@ -85,7 +83,6 @@ app.use(
 const options = {
   customSiteTitle: "E-nauli experience API",
   swaggerOptions: {
-    // validatorUrl: null,
     displayRequestDuration: true,
     docExpansion: "none",
     filter: false,
