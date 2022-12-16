@@ -36,6 +36,14 @@
           presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
           plugins: [SwaggerUIBundle.plugins.DownloadUrl],
           layout: "StandaloneLayout",
+
+          filter: false,
+          displayRequestDuration: true,
+          docExpansion: "list",
+          filter: false,
+          showExtensions: true,
+          showCommonExtensions: true,
+          displayOperationId: false,
         });
       };
     </script>
