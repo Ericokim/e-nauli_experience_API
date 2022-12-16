@@ -73,7 +73,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 const options = {
-  customCss: ".swagger-ui .topbar { display: block }",
+  // customCss: ".swagger-ui .topbar { display: block }",
   customSiteTitle: "E-nauli experience API",
   customCssUrl: "/swagger-ui.css",
   swaggerOptions: {
