@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
@@ -73,7 +74,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const options = {
   customCss: ".swagger-ui .topbar { display: block }",
+  customSiteTitle: "E-nauli experience API",
+  // customCssUrl: "/custom.css",
+
   swaggerOptions: {
+    // validatorUrl: null,
     displayRequestDuration: true,
     docExpansion: "none",
     filter: false,

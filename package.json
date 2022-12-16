@@ -46,6 +46,8 @@
     "rotating-file-stream": "^3.0.4",
     "swagger-autogen": "^2.22.0",
     "swagger-jsdoc": "^6.2.5",
+    "swagger-ui": "^4.15.5",
+    "swagger-ui-dist": "^4.15.5",
     "swagger-ui-express": "^4.6.0",
     "url": "^0.11.0",
     "xss-clean": "^0.1.1"

@@ -20,7 +20,6 @@ exports.getToken = asyncHandler(async (req, res, next) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
     });
 
     return res.json(data);
@@ -44,11 +43,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     .then((resp) => {
       // console.log(data.data[0].accessToken);
       let token = resp.data.data[0]?.accessToken;
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-      });
+      res.cookie("token", token);
 
       const config = {
         headers: {
@@ -100,11 +95,7 @@ exports.addWebProfile = asyncHandler(async (req, res, next) => {
     .then((resp) => {
       // console.log(data.data[0].accessToken);
       let token = resp.data.data[0]?.accessToken;
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-      });
+      res.cookie("token", token);
 
       const config = {
         headers: {
@@ -166,6 +157,9 @@ exports.login = asyncHandler(async (req, res, next) => {
 
       // Data to be sent
       const formData = {
+        // emailOrPhoneNumberOrId: req.body.emailOrPhoneNumberOrId,
+        // pin: req.body.pin,
+
         emailOrPhoneNumber: req.body.emailOrPhoneNumber,
         password: req.body.password,
       };
@@ -182,8 +176,8 @@ exports.login = asyncHandler(async (req, res, next) => {
           res.cookie("token", tokenAuth, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
           });
+
           res.json(respn.data);
         })
         .catch((error) => {
@@ -201,8 +195,6 @@ exports.login = asyncHandler(async (req, res, next) => {
 // @route     GET /api/v1/auth/logout
 // @access    Public
 exports.logout = asyncHandler(async (req, res, next) => {
-  // clear the cookie
-  res.clearCookie("token");
   res.cookie("token", "none", {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
