@@ -4,6 +4,7 @@ const {
   getSacco,
   addSacco,
   updateSacco,
+  getUserSaccos,
   updateSaccoStatus,
   getSaccoCharges,
   getSaccoCharge,
@@ -33,6 +34,7 @@ router.route("/getSaccos").get(getSaccos);
 router.route("/getSacco/:id").get(getSacco);
 router.route("/addSacco").post(addSacco);
 router.route("/updateSacco").put(updateSacco);
+router.route("/getUserSaccos/:id").get(getUserSaccos);
 router.route("/updateSaccoStatus").put(updateSaccoStatus);
 
 router.route("/getSaccoCharges").get(getSaccoCharges);
