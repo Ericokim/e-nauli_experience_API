@@ -67,20 +67,20 @@
       "loginBody": {
         "type": "object",
         "properties": {
-          "emailOrPhoneNumber": {
+          "emailOrPhoneNumberOrId": {
             "type": "string",
             "required": true,
-            "description": "valid email or phone number(07XXX or 01XXX or 254XX) to be used for login"
+            "description": "valid email,id or phone number(07XXX or 01XXX or 254XX) to be used for login"
           },
-          "password": {
+          "pin": {
             "type": "string",
             "required": true,
-            "description": "User password"
+            "description": "User pin"
           }
         },
         "example": {
-          "emailOrPhoneNumber": "string",
-          "password": "string"
+          "emailOrPhoneNumberOrId": "string",
+          "pin": "string"
         }
       },
       "changePasswordBody": {
@@ -182,6 +182,48 @@
           "saccoStationId": "string"
         }
       },
+      "verifyCodeBody": {
+        "type": "object",
+        "properties": {
+          "msisdn": {
+            "type": "string",
+            "required": true,
+            "description": "Phone number of the user in INTERNATIONAl format. E.g. 2547XXXXXX or 2541XXXXXX"
+          },
+          "code": {
+            "type": "string",
+            "required": true,
+            "description": "Verification Code"
+          }
+        },
+        "example": {
+          "msisdn": "string",
+          "code": "string"
+        }
+      },
+
+      "verificationCodeBody": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "boolean",
+            "description": "Status"
+          }
+        },
+        "example": {
+          "status": {
+            "code": "string",
+            "message": "string"
+          },
+          "data": [true],
+          "paging": {
+            "next": "string",
+            "previous": "string",
+            "count": 0
+          }
+        }
+      },
+
       "Vehicle": {
         "type": "object",
         "properties": {
@@ -412,11 +454,7 @@
             "type": "string",
             "required": true,
             "description": "Designation of a user to a vehicle. Can be one or multiple",
-            "Enumerator": [
-              "Conductor",
-              "Driver",
-              "Owner"
-            ]
+            "Enumerator": ["Conductor", "Driver", "Owner"]
           },
           "firstName": {
             "type": "string",
@@ -457,9 +495,7 @@
         "example": {
           "msisdn": "254725358366",
           "vehicleId": "string",
-          "role": [
-            "Conductor"
-          ],
+          "role": ["Conductor"],
           "firstName": "string",
           "middleName": "string",
           "lastName": "string",
@@ -486,20 +522,13 @@
             "type": "string",
             "required": true,
             "description": "Designation of a user to a vehicle. Can be one or multiple",
-            "Enumerator": [
-              "Conductor",
-              "Driver",
-              "Owner"
-            ]
+            "Enumerator": ["Conductor", "Driver", "Owner"]
           },
           "activate": {
             "type": "boolean",
             "required": true,
             "description": "Activate flag toggles active(activate: true) and inactive(activate: false) status of an operator role for a specified vehicle",
-            "example": [
-              "true",
-              "false"
-            ]
+            "example": ["true", "false"]
           }
         },
         "example": {
@@ -753,10 +782,7 @@
             "type": "boolean",
             "required": true,
             "description": "Activate flag toggles active(activate: true) and inactive(activate: false) status",
-            "example": [
-              "true",
-              "false"
-            ]
+            "example": ["true", "false"]
           }
         },
         "example": {
@@ -929,10 +955,7 @@
             "type": "boolean",
             "required": true,
             "description": "Activate flag toggles active(activate: true) and inactive(activate: false) status",
-            "example": [
-              "true",
-              "false"
-            ]
+            "example": ["true", "false"]
           }
         },
         "example": {
@@ -1117,10 +1140,7 @@
             "type": "boolean",
             "required": true,
             "description": "Activate flag toggles active(activate: true) and inactive(activate: false) status",
-            "example": [
-              "true",
-              "false"
-            ]
+            "example": ["true", "false"]
           }
         },
         "example": {
@@ -1237,10 +1257,7 @@
             "type": "boolean",
             "required": true,
             "description": "Activate flag toggles active(activate: true) and inactive(activate: false) status",
-            "example": [
-              "true",
-              "false"
-            ]
+            "example": ["true", "false"]
           }
         },
         "example": {
@@ -1286,9 +1303,7 @@
   },
   "security": [
     {
-      "bearerAuth": [
-        
-      ]
+      "bearerAuth": []
     }
   ],
   "tags": [
@@ -1314,9 +1329,7 @@
   "paths": {
     "/api/v1/auth/register": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Register a user",
         "description": "Create an account for the specified user",
         "operationId": "registerUser",
@@ -1330,9 +1343,7 @@
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -1362,9 +1373,7 @@
     },
     "/api/v1/auth/login": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "login user",
         "description": "Signln provides functionality to sign in a user to the web app",
         "operationId": "loginUser",
@@ -1381,9 +1390,7 @@
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -1413,22 +1420,14 @@
     },
     "/api/v1/auth/logout": {
       "get": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "logout User",
         "description": "Logout User and Clear token cookie",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          
-        ],
+        "produces": ["application/json"],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -1446,20 +1445,14 @@
     },
     "/api/v1/auth/changePassword": {
       "put": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Change user password",
         "description": "Change user password",
         "operationId": "changePassword",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -1492,9 +1485,7 @@
     },
     "/api/v1/auth/resetPassword": {
       "put": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "reset user password",
         "description": "reset user password",
         "operationId": "resetPassword",
@@ -1508,9 +1499,7 @@
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -1543,9 +1532,7 @@
     },
     "/api/v1/auth/addWebProfile": {
       "put": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "add user WebProfile",
         "description": "add user WebProfile",
         "operationId": "addWebProfile",
@@ -1559,9 +1546,7 @@
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -1592,16 +1577,111 @@
         }
       }
     },
+    "/api/v1/auth/verifyCode": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Verify Code",
+        "description": "Validates a verification code",
+        "operationId": "verifyCode",
+        "parameters": [
+          {
+            "name": "x-server-key",
+            "in": "header",
+            "required": true,
+            "description": "An authorization header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/verifyCodeBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request processed successfullyy"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/verificationCode/{msisdn}": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "Get Verification code",
+        "description": "Sends the user a verification code a.k.a OTP",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "x-server-key",
+            "in": "header",
+            "required": true,
+            "description": "An authorization header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "msisdn",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/verificationCodeBody"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+
     "/api/v1/fleet/getVehicles": {
       "get": {
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "summary": "Fetch all Vehicles",
         "description": "Return list of all Vehicles",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "offset",
@@ -1642,9 +1722,7 @@
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -1670,20 +1748,14 @@
     },
     "/api/v1/fleet/addVehicle": {
       "post": {
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "summary": "Add Vehicles",
         "description": "Create Vehicle",
         "operationId": "createVehicle",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -1713,20 +1785,14 @@
     },
     "/api/v1/fleet/updateVehicle": {
       "put": {
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "summary": "Update Vehicles",
         "description": "Update Vehicle",
         "operationId": "updateVehicle",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -1759,14 +1825,10 @@
     },
     "/api/v1/fleet/getOperators": {
       "get": {
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "summary": "Fetch all Operators",
         "description": "Return list of all Operators",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "offset",
@@ -1798,9 +1860,7 @@
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -1826,20 +1886,14 @@
     },
     "/api/v1/fleet/addOperator": {
       "post": {
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "summary": "Add Operators",
         "description": "Create Operator",
         "operationId": "createOperator",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -1869,20 +1923,14 @@
     },
     "/api/v1/fleet/updateOperator": {
       "put": {
-        "tags": [
-          "Fleet"
-        ],
+        "tags": ["Fleet"],
         "summary": "Update Operators",
         "description": "Update Operator",
         "operationId": "updateOperator",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -1913,17 +1961,14 @@
         }
       }
     },
+
     "/api/v1/sacco/getSaccos": {
       "get": {
-        "tags": [
-          "Sacco"
-        ],
+        "tags": ["Sacco"],
         "summary": "Fetch all Saccos",
         "description": "Return list of all Saccos",
         "operationId": "allSacco",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "offset",
@@ -1946,9 +1991,7 @@
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -1974,15 +2017,11 @@
     },
     "/api/v1/sacco/getSacco/{id}": {
       "get": {
-        "tags": [
-          "Sacco"
-        ],
+        "tags": ["Sacco"],
         "summary": "Fetch single Sacco",
         "description": "",
         "operationId": "singleSacco",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -1995,9 +2034,7 @@
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -2026,20 +2063,14 @@
     },
     "/api/v1/sacco/addSacco": {
       "post": {
-        "tags": [
-          "Sacco"
-        ],
+        "tags": ["Sacco"],
         "summary": "Add Sacco",
         "description": "Create Sacco",
         "operationId": "createSacco",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -2069,20 +2100,14 @@
     },
     "/api/v1/sacco/updateSacco": {
       "put": {
-        "tags": [
-          "Sacco"
-        ],
+        "tags": ["Sacco"],
         "summary": "Update Sacco",
         "description": "Update Sacco",
         "operationId": "updateSacco",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -2115,20 +2140,14 @@
     },
     "/api/v1/sacco/updateSaccoStatus": {
       "put": {
-        "tags": [
-          "Sacco"
-        ],
+        "tags": ["Sacco"],
         "summary": "Update Sacco Status",
         "description": "Update Sacco Status",
         "operationId": "updateSaccoStatus",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -2159,16 +2178,55 @@
         }
       }
     },
+    "/api/v1/sacco/getUserSaccos/{userId}": {
+      "get": {
+        "tags": ["Sacco"],
+        "summary": "Fetch all Saccos which a user can administer",
+        "description": " Retrieves saccos for which a user can administer",
+        "operationId": "getUserSaccos",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Sacco"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
     "/api/v1/sacco/getSaccoCharges": {
       "get": {
-        "tags": [
-          "Sacco Charge"
-        ],
+        "tags": ["Sacco Charge"],
         "summary": "Fetch all Sacco Charges",
         "description": "Return list of all Sacco Charges",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "offset",
@@ -2215,9 +2273,7 @@
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -2243,15 +2299,11 @@
     },
     "/api/v1/sacco/getSaccoCharge/{id}": {
       "get": {
-        "tags": [
-          "Sacco Charge"
-        ],
+        "tags": ["Sacco Charge"],
         "summary": "Fetch single Sacco Charge",
         "description": "",
         "operationId": "singleSaccoCharge",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -2264,9 +2316,7 @@
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -2295,20 +2345,14 @@
     },
     "/api/v1/sacco/addSaccoCharge": {
       "post": {
-        "tags": [
-          "Sacco Charge"
-        ],
+        "tags": ["Sacco Charge"],
         "summary": "Add Sacco Charge",
         "description": "Create SaccoCharge",
         "operationId": "createSaccoCharge",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -2338,20 +2382,14 @@
     },
     "/api/v1/sacco/updateSaccoCharge": {
       "put": {
-        "tags": [
-          "Sacco Charge"
-        ],
+        "tags": ["Sacco Charge"],
         "summary": "Update Sacco Charges",
         "description": "Update Sacco Charge",
         "operationId": "updateSaccoCharge",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -2384,20 +2422,14 @@
     },
     "/api/v1/sacco/updateSaccoChargeStatus": {
       "put": {
-        "tags": [
-          "Sacco Charge"
-        ],
+        "tags": ["Sacco Charge"],
         "summary": "Update Sacco Charge Status",
         "description": "Update Sacco Charge Status",
         "operationId": "updateSaccoChargeStatus",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -2430,20 +2462,14 @@
     },
     "/api/v1/sacco/SaccoBalance": {
       "post": {
-        "tags": [
-          "Sacco"
-        ],
+        "tags": ["Sacco"],
         "summary": "Sacco Balance",
         "description": "Gets specified sacco account running balance in cents",
         "operationId": "SaccoBalance",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -2473,14 +2499,10 @@
     },
     "/api/v1/sacco/getSaccoStations": {
       "get": {
-        "tags": [
-          "Sacco Station"
-        ],
+        "tags": ["Sacco Station"],
         "summary": "Fetch all Sacco Station",
         "description": "Return list of all Sacco Station",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "offset",
@@ -2516,18 +2538,13 @@
             "schema": {
               "type": "string",
               "description": "Filter operations",
-              "enum": [
-                "true",
-                "false"
-              ]
+              "enum": ["true", "false"]
             }
           }
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -2553,15 +2570,11 @@
     },
     "/api/v1/sacco/getSaccoStation/{id}": {
       "get": {
-        "tags": [
-          "Sacco Station"
-        ],
+        "tags": ["Sacco Station"],
         "summary": "Fetch single Sacco Station",
         "description": "",
         "operationId": "singleSaccoStation",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -2574,9 +2587,7 @@
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -2605,20 +2616,14 @@
     },
     "/api/v1/sacco/addSaccoStation": {
       "post": {
-        "tags": [
-          "Sacco Station"
-        ],
+        "tags": ["Sacco Station"],
         "summary": "Add Sacco Station",
         "description": "Create Sacco Station",
         "operationId": "createSaccoStation",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -2648,20 +2653,14 @@
     },
     "/api/v1/sacco/updateSaccoStation": {
       "put": {
-        "tags": [
-          "Sacco Station"
-        ],
+        "tags": ["Sacco Station"],
         "summary": "Update Sacco Station",
         "description": "Update Sacco Station",
         "operationId": "updateSaccoStation",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -2694,20 +2693,14 @@
     },
     "/api/v1/sacco/updateSaccoStationStatus": {
       "put": {
-        "tags": [
-          "Sacco Station"
-        ],
+        "tags": ["Sacco Station"],
         "summary": "Update Sacco Station Status",
         "description": "Update Sacco Station Status",
         "operationId": "updateSaccoStationStatus",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -2740,14 +2733,10 @@
     },
     "/api/v1/sacco/getSaccosOfficials": {
       "get": {
-        "tags": [
-          "Sacco Official"
-        ],
+        "tags": ["Sacco Official"],
         "summary": "Fetch all Sacco Official",
         "description": "Return list of all Sacco Official",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "offset",
@@ -2801,10 +2790,7 @@
             "schema": {
               "type": "string",
               "description": "Filter operations",
-              "enum": [
-                "true",
-                "false"
-              ]
+              "enum": ["true", "false"]
             }
           },
           {
@@ -2827,9 +2813,7 @@
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -2855,15 +2839,11 @@
     },
     "/api/v1/sacco/getSaccosOfficial/{id}": {
       "get": {
-        "tags": [
-          "Sacco Official"
-        ],
+        "tags": ["Sacco Official"],
         "summary": "Fetch single Sacco Official",
         "description": "",
         "operationId": "singleSaccosOfficial",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
@@ -2876,9 +2856,7 @@
         ],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "responses": {
@@ -2907,20 +2885,14 @@
     },
     "/api/v1/sacco/addSaccosOfficial": {
       "post": {
-        "tags": [
-          "Sacco Official"
-        ],
+        "tags": ["Sacco Official"],
         "summary": "Add Sacco Official",
         "description": "Create Sacco Official",
         "operationId": "createSaccosOfficial",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -2950,20 +2922,14 @@
     },
     "/api/v1/sacco/updateSaccosOfficial": {
       "put": {
-        "tags": [
-          "Sacco Official"
-        ],
+        "tags": ["Sacco Official"],
         "summary": "Update Sacco Official",
         "description": "Update Sacco Official",
         "operationId": "updateSaccosOfficial",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -2996,20 +2962,14 @@
     },
     "/api/v1/sacco/updateSaccosOfficialStatus": {
       "put": {
-        "tags": [
-          "Sacco Official"
-        ],
+        "tags": ["Sacco Official"],
         "summary": "Update Sacco Official Status",
         "description": "Update Sacco Official Status",
         "operationId": "updateSaccosOfficialStatus",
-        "parameters": [
-          
-        ],
+        "parameters": [],
         "security": [
           {
-            "bearerAuth": [
-              
-            ]
+            "bearerAuth": []
           }
         ],
         "requestBody": {
