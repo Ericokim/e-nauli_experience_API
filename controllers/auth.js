@@ -15,7 +15,7 @@ exports.getToken = asyncHandler(async (req, res, next) => {
     };
 
     const { data } = await api.post(`/auth/token`, formData);
-    // console.log(data.data[0].accessToken);
+    console.log(data.data[0].accessToken);
     let token = data.data[0]?.accessToken;
     res.cookie("token", token, {
       httpOnly: true,
@@ -143,10 +143,10 @@ exports.addWebProfile = asyncHandler(async (req, res, next) => {
     });
 });
 
-// @descr      Login user
-// @route     POST /api/v1/auth/login
+// @descr     SignIn user - to the web app
+// @route     POST /api/v1/auth/signIn
 // @access    Public
-exports.login = asyncHandler(async (req, res, next) => {
+exports.signIn = asyncHandler(async (req, res, next) => {
   const tokenformData = {
     apiKey: API_KEY,
     appSecret: APP_SECRET,
@@ -177,6 +177,49 @@ exports.login = asyncHandler(async (req, res, next) => {
           formData, // req.body
           config
         )
+        .then((respn) => {
+          let tokenAuth = respn.data.data[0]?.accessToken;
+          res.cookie("token", tokenAuth, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+          });
+          res.json(respn.data);
+        })
+        .catch((error) => {
+          let err = error.response?.data.status;
+          return next(new ErrorResponse(err.message, err.code));
+        });
+    })
+    .catch((error) => {
+      let err = error.response.data.status;
+      return next(new ErrorResponse(err.message, err.code));
+    });
+});
+
+// @descr     Login user - to ussd or apps
+// @route     POST /api/v1/auth/login
+// @access    Public
+exports.login = asyncHandler(async (req, res, next) => {
+  const tokenformData = {
+    apiKey: API_KEY,
+    appSecret: APP_SECRET,
+  };
+
+  await api
+    .post(`/auth/token`, tokenformData)
+    .then((resp) => {
+      // console.log(data.data[0].accessToken);
+      let token = resp.data.data[0]?.accessToken;
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      api
+        .post(`/user/login`, req.body, config)
         .then((respn) => {
           let tokenAuth = respn.data.data[0]?.accessToken;
           res.cookie("token", tokenAuth, {

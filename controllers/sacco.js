@@ -94,6 +94,24 @@ exports.updateSaccoStatus = asyncHandler(async (req, res, next) => {
   }
 });
 
+// @descr     Retrieves saccos for which a user can administer
+// @route     GET /api/v1/sacco/getsaccos/:userId
+// @access    Private
+exports.getUserSaccos = asyncHandler(async (req, res, next) => {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${req.cookies.token}` },
+    };
+
+    const { data } = await api.get(`/user/getSaccos/${req.params.id}`, config);
+    // res.json(data);
+
+     return successHandler(res, data);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // @descr     Get all Sacco Charge based on applied filters.
 // @route     GET /api/v1/sacco/getSaccosCharge?offset=0&pageSize=10
 // @access    Private
