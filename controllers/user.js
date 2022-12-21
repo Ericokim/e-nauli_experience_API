@@ -58,3 +58,28 @@ exports.updateUserStatus = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(err.message, err.code));
   }
 });
+
+// @descr     Get single User
+// @route     GET /api/v1/user/getUserByPhone/:phoneNumber
+// @access    Private
+exports.getUserByPhone = asyncHandler(async (req, res, next) => {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${req.cookies.token}` },
+    };
+
+    const params = new URLSearchParams({
+      ...url.parse(req.url, true).query,
+    });
+
+    const { data } = await api.get(
+      `/user/getUserByMsisdn/${req.params.id}`,
+      config
+    );
+    // res.json(data);
+
+    return successHandler(res, data);
+  } catch (error) {
+    next(error);
+  }
+});
