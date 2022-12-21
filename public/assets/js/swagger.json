@@ -224,6 +224,41 @@
         }
       },
 
+      "User": {
+        "type": "object",
+        "properties": {},
+        "example": {
+          "message": "string",
+          "count": 0,
+          "data": [
+            {
+              "userId": "string",
+              "msisdn": "string",
+              "idNumber": "string",
+              "idType": "string",
+              "carrierCode": "string",
+              "firstName": "string",
+              "middleName": "string",
+              "lastName": "string",
+              "officialNames": "string",
+              "email": "string",
+              "yearOfBirth": 0,
+              "gender": "string",
+              "isStaff": true,
+              "isActive": true,
+              "isVerified": true,
+              "isPinSet": true,
+              "hasBank": true,
+              "isFullyRegistered": true,
+              "isMsisdnConfirmed": true,
+              "designation": ["string"],
+              "createdAt": "2022-12-21T07:13:08.604Z",
+              "modifiedAt": "2022-12-21T07:13:08.604Z"
+            }
+          ]
+        }
+      },
+
       "Vehicle": {
         "type": "object",
         "properties": {
@@ -1314,6 +1349,9 @@
       "name": "Fleet"
     },
     {
+      "name": "User"
+    },
+    {
       "name": "Sacco"
     },
     {
@@ -1662,6 +1700,59 @@
                 "schema": {
                   "type": "object",
                   "$ref": "#/components/schemas/verificationCodeBody"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+
+    "/api/v1/user/getUsers": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Fetch all Users",
+        "description": "Return list of all Users",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The number of items to skip before starting to collect the result set"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "The numbers of items to return"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }

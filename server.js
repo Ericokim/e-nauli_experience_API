@@ -23,6 +23,7 @@ dotenv.config();
 const auth = require("./routes/auth");
 const fleet = require("./routes/fleet");
 const sacco = require("./routes/sacco");
+const user = require("./routes/user");
 
 // Initialize express
 const app = express();
@@ -96,6 +97,7 @@ const options = {
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/fleet", fleet);
 app.use("/api/v1/sacco", sacco);
+app.use("/api/v1/user", user);
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs, options));
 
 // Docs in JSON format
