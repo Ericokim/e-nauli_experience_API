@@ -24,3 +24,37 @@ exports.getUsers = asyncHandler(async (req, res, next) => {
     next(error);
   }
 });
+
+// @descr     Update User
+// @route     PUT /api/v1/user/updateUser
+// @access    Private
+exports.updateUser = asyncHandler(async (req, res, next) => {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${req.cookies.token}` },
+    };
+
+    const { data } = await api.put(`/user/edit`, req.body, config);
+    res.json(data);
+  } catch (error) {
+    let err = error.response.data.status;
+    return next(new ErrorResponse(err.message, err.code));
+  }
+});
+
+// @descr     Update User Status
+// @route     PUT /api/v1/user/updateUserStatus
+// @access    Private
+exports.updateUserStatus = asyncHandler(async (req, res, next) => {
+  try {
+    const config = {
+      headers: { Authorization: `Bearer ${req.cookies.token}` },
+    };
+
+    const { data } = await api.put(`/user/status`, req.body, config);
+    res.json(data);
+  } catch (error) {
+    let err = error.response.data.status;
+    return next(new ErrorResponse(err.message, err.code));
+  }
+});
